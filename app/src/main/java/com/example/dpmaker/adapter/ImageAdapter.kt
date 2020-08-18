@@ -31,8 +31,6 @@ class ImageAdapter(
         Log.i("uploads", " --------muploads---------"+mUploads)
         val uploadCurrent = mUploads[position]
         if (uploadCurrent != null) {
-//            holder.textViewName.text = uploadCurrent.name
-//            Log.i("uploads", " -------uploadcurrent.name----------"+uploadCurrent.name)
             Glide.with(mContext)
                 .load(uploadCurrent)
                 .into(holder.imageView)
@@ -45,7 +43,6 @@ class ImageAdapter(
 
     inner class ImageViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
-//        var textViewName: TextView = itemView.findViewById(R.id.textViewName)
         var imageView: ImageView = itemView.findViewById(R.id.imageView)
 
     }

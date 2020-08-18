@@ -19,23 +19,14 @@ import kotlinx.android.synthetic.main.activity_images.*
 import java.util.*
 
 class ImagesActivity : AppCompatActivity() {
-    private val imgUrl: ArrayList<String> = ArrayList()
     private lateinit var mRecyclerView: RecyclerView
     private var mAdapter: ImageAdapter? = null
     private lateinit var mProgressCircle: ProgressBar
     private var mDatabaseRef: DatabaseReference? = null
-//    var mUploads: MutableList<NewUpload?>? = null
     var mUploads: MutableList<String?>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_images)
-      /*  imgUrl.add("https://firebasestorage.googleapis.com/v0/b/dpmaker-21479.appspot.com/o/images%2F1.png?alt=media&token=87d8ebbe-5b30-4588-a3dc-b4fbc424047e")
-        imgUrl.add("https://firebasestorage.googleapis.com/v0/b/dpmaker-21479.appspot.com/o/images%2F2.png?alt=media&token=31721349-9ecc-4ef1-b0ff-0768cbf20b24")
-        imgUrl.add("https://firebasestorage.googleapis.com/v0/b/dpmaker-21479.appspot.com/o/images%2F3.png?alt=media&token=15033d35-de12-42aa-b438-bc2d1f7e4956")
-        imgUrl.add("https://firebasestorage.googleapis.com/v0/b/dpmaker-21479.appspot.com/o/images%2F4.png?alt=media&token=8aadbcbc-abe7-428f-9bd3-57fe78fcc70a")
-        imgUrl.add("https://firebasestorage.googleapis.com/v0/b/dpmaker-21479.appspot.com/o/images%2F5.png?alt=media&token=725d0f4a-dd2d-4f4b-b22f-f894951b947e")
-*/
-
         mRecyclerView = findViewById(R.id.recycler_view)
         mRecyclerView.setHasFixedSize(true)
         mRecyclerView.layoutManager =
@@ -48,10 +39,7 @@ class ImagesActivity : AppCompatActivity() {
                 Log.i("DataSnapTest",""+dataSnapshot.value)
                 for (postSnapshot in dataSnapshot.children) {
                     Log.i("postSnapshot",""+postSnapshot.value)
-/*                    val upload = postSnapshot.getValue(NewUpload::class.java)
-                    Log.i("upload", "-----------$upload")*/
                     mUploads?.add(postSnapshot.value as String?)
-
                 }
                 mAdapter = mUploads?.let { ImageAdapter(this@ImagesActivity, it) }
                 mRecyclerView.adapter = mAdapter
@@ -59,14 +47,12 @@ class ImagesActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                Toast.makeText(this@ImagesActivity, "Am here 43 "+databaseError.message, Toast.LENGTH_SHORT)
+                Toast.makeText(this@ImagesActivity,databaseError.message, Toast.LENGTH_SHORT)
                     .show()
                 mProgressCircle.visibility = View.INVISIBLE
             }
         })
-//        mAdapter = MyAdapter(imgUrl,this@ImagesActivity)
-//
-//        mRecyclerView.adapter = mAdapter
+
         mRecyclerView.addOnItemTouchListener(RecyclerItemClickListenr
             (this, mRecyclerView, object :
             RecyclerItemClickListenr.OnItemClickListener {
@@ -85,9 +71,14 @@ class ImagesActivity : AppCompatActivity() {
         }))
         val btnCreateDp = findViewById<Button>(R.id.btn_create_dp)
         btnCreateDp.setOnClickListener{
-            val intent = Intent(this, CreationPage::class.java)
-//            intent.putExtra("URL",UtilsString.pos)
-            startActivity(intent)
+            if (main_image.drawable == null){
+                Toast.makeText(this@ImagesActivity,
+                    "Please select the frame" ,Toast.LENGTH_SHORT)
+                    .show()
+            } else{
+                val intent = Intent(this, CreationPage::class.java)
+                startActivity(intent)
+            }
         }
     }
 }

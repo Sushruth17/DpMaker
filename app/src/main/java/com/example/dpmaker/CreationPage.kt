@@ -1,23 +1,28 @@
 package com.example.dpmaker
 
+import android.R.attr
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
 import com.example.dpmaker.utils.UtilsString
 import kotlinx.android.synthetic.main.activity_creation_page.*
 import java.io.File
+import java.io.FileNotFoundException
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,8 +31,6 @@ import java.util.*
 class CreationPage : AppCompatActivity() {
 
     private var bitmap : Bitmap? = null
-    var image_uri: Uri? = null
-    var bmOptions = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creation_page)
@@ -44,9 +47,6 @@ class CreationPage : AppCompatActivity() {
         UtilsString.frameImg = imgView
         val btnUpload = findViewById<Button>(R.id.btn_upload)
         btnUpload.setOnClickListener {
-/*            val intent = Intent(this, EditorScreen::class.java)
-            startActivity(intent)*/
-
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
             startActivityForResult(intent, 1)
@@ -68,7 +68,7 @@ class CreationPage : AppCompatActivity() {
                     photoFile?.also {
                         val photoURI: Uri = FileProvider.getUriForFile(
                             this,
-                            "com.example.dpmaker",
+                            "com.example.android.fileprovider",
                             it
                         )
                         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
@@ -79,13 +79,26 @@ class CreationPage : AppCompatActivity() {
         }
         val btnEdit = findViewById<Button>(R.id.btn_edit)
         btnEdit.setOnClickListener {
-            val intent = Intent(this, EditorScreen::class.java)
-            startActivity(intent)
+            if (selected_image.drawable == null){
+                Toast.makeText(this,
+                    "Please Upload an Image" , Toast.LENGTH_SHORT)
+                    .show()
+            } else{
+                val intent = Intent(this, EditorScreen::class.java)
+                startActivity(intent)
+            }
+
         }
         val btnSave = findViewById<Button>(R.id.btn_save)
         btnSave.setOnClickListener {
-            val intent = Intent(this, DesignFormat::class.java)
-            startActivity(intent)
+            if (selected_image.drawable == null){
+                Toast.makeText(this,
+                    "Please Upload an Image" , Toast.LENGTH_SHORT)
+                    .show()
+            } else{
+                val intent = Intent(this, DesignFormat::class.java)
+                startActivity(intent)
+            }
         }
 
         val btnClose = findViewById<ImageButton>(R.id.btn_close)
@@ -106,9 +119,26 @@ class CreationPage : AppCompatActivity() {
                 photo_here_txt.visibility = View.GONE
             }
             else if (requestCode == 2  && data!=null){
-            val imageBitmap = data.extras?.get("data") as Bitmap
+            /*val imageBitmap = data.extras?.get("data") as Bitmap
                 selectedImg.setImageBitmap(imageBitmap)
-                photo_here_txt.visibility = View.GONE
+                photo_here_txt.visibility = View.GONE*/
+                try {
+                    val selectedImageUri: Uri? = data.data
+                    Log.e("selectedImageUri ", " = $selectedImageUri")
+                    if (selectedImageUri != null) {
+                        val bmp = BitmapFactory.decodeStream(
+                            contentResolver.openInputStream(selectedImageUri)
+                        )
+                        Log.e("bmp ", " = $bmp")
+                        selectedImg.setImageBitmap(bmp)
+                        Log.e("bmp ", " Displaying Imageview WIth Bitmap !!!!  = ")
+                    } else {
+                        // If selectedImageUri is null check extras for bitmap
+                        selectedImg.setImageBitmap(data.extras?.get("data") as Bitmap?)
+                    }
+                } catch (fe: FileNotFoundException) {
+                    fe.printStackTrace()
+                }
             }
             UtilsString.slecetedImg = selectedImg
         }
