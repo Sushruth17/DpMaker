@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "628353021914",
+    "firebase_url": "https://dpmaker-21479.firebaseio.com",
+    "project_id": "dpmaker-21479",
+    "storage_bucket": "dpmaker-21479.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628353021914:android:ee8ebbccc37f2ebc6672e3",
+        "android_client_info": {
+          "package_name": "com.example.dpmaker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628353021914-7ijr64m62otubm4efo3u32fmaocl1i3q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dpmaker",
+            "certificate_hash": "34964d9029dcf1d3a8396f411941e62597f61d1b"
+          }
+        },
+        {
+          "client_id": "628353021914-6snp6r41dp5bineritsdluenndjma1n2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAndEhPp4Vvnlj_0DZKDtO4D5x9gDwV5AE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "628353021914-6snp6r41dp5bineritsdluenndjma1n2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

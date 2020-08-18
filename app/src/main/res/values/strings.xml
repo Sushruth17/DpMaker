@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">DP Maker</string>
+    <string name="javasampleapproach_com">JavaSampleApproach.com</string>
+
+
+    <string-array name="image_format_array">
+        <item>JPG</item>
+        <item>PNG</item>
+    </string-array>
+</resources>
+

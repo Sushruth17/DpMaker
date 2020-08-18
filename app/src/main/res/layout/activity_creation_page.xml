@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreationPage"
+    android:background="@android:color/white">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        android:text="Add Photo"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"/>
+
+    <ImageButton
+        android:id="@+id/btn_close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_close"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_img_creation_page"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="150dp">
+    <ImageView
+        android:id="@+id/frame_image"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:elevation="8dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"/>
+
+    <ImageView
+        android:id="@+id/selected_image"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:cropToPadding="true"
+        android:layout_alignParentBottom="true"
+        android:background="#30FB6264"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/photo_here_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Photo\nHere"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintTop_toTopOf="@id/rl_img_creation_page"
+        app:layout_constraintStart_toStartOf="@id/rl_img_creation_page"
+        app:layout_constraintEnd_toEndOf="@id/rl_img_creation_page"
+        app:layout_constraintBottom_toBottomOf="@id/rl_img_creation_page"/>
+
+
+
+    <Button
+        android:id="@+id/btn_upload"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rl_img_creation_page"
+        app:layout_constraintEnd_toStartOf="@id/btn_click"
+        android:text="Upload Photo"
+        android:textColor="@android:color/white"
+        android:drawableStart="@drawable/ic_image"
+        android:background="@drawable/button_background"
+        android:padding="10dp"/>
+    <Button
+        android:id="@+id/btn_click"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rl_img_creation_page"
+        app:layout_constraintStart_toEndOf="@id/btn_upload"
+        android:background="@drawable/border"
+        android:drawableStart="@drawable/ic_camera"
+        android:text="Click Photo"
+        android:padding="10dp"/>
+
+    <Button
+        android:id="@+id/btn_edit"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_upload"
+        app:layout_constraintEnd_toStartOf="@id/btn_save"
+        android:text="Edit photo"
+        android:textColor="@android:color/white"
+        android:drawableStart="@drawable/ic_edit"
+        android:background="@drawable/button_background"
+        android:padding="10dp"/>
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_click"
+        app:layout_constraintStart_toEndOf="@id/btn_edit"
+        android:background="@drawable/border"
+        android:drawableStart="@drawable/ic_save_black"
+        android:text="Save photo"
+        android:padding="10dp"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
